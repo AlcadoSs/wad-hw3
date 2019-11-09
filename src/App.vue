@@ -6,16 +6,16 @@
         <section id="container">
             <section id="main">
                 <div class="content">
-                    <div id="profile-container" class="tab active">
+                    <div id="profile-container" class="tab" :class="{ active: isActive('profile') }">
                         <Profile/>
                     </div>
-                    <div id="courses-container" class="tab">
+                    <div id="courses-container" class="tab" :class="{ active: isActive('courses') }">
                         <Courses/>
                     </div>
                 </div>
                 <div class="controls">
-                    <button id="profile-button" class="pill active">Profile</button>
-                    <button id="courses-button" class="pill">Courses</button>
+                    <button id="profile-button" class="pill"    @click="setActive('profile')" :class="{ active: isActive('profile') }">Profile</button>
+                    <button id="courses-button" class="pill" @click="setActive('courses')" :class="{ active: isActive('courses') }">Courses</button>
                 </div>
             </section>
         </section>
@@ -37,6 +37,18 @@
             Profile,
             Courses
         },
+
+        data() {
+            return { activeItem: 'profile' }
+        },
+        methods: {
+            isActive: function (menuItem) {
+                return this.activeItem === menuItem
+            },
+            setActive: function (menuItem) {
+                this.activeItem = menuItem // no need for Vue.set()
+            }
+        }
     }
 
 
