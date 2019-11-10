@@ -46,7 +46,7 @@
                 return this.activeItem === menuItem
             },
             setActive: function (menuItem) {
-                this.activeItem = menuItem // no need for Vue.set()
+                this.activeItem = menuItem
             }
         }
     }
