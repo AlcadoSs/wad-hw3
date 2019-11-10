@@ -24,9 +24,9 @@
         <div>
             <button id="add-course-button" class="blue-button" v-on:click="addCourse = !addCourse">+</button>
             <span id="add-course" v-show="addCourse">
-                <input class="input" type="text" placeholder="Course title" id="title">
-                <input class="input" type="number" min="1" max="8" placeholder="Semester" id="semester">
-                <input class="input" type="number" min="0" max="100" placeholder="Grade" id="grade">
+                <input class="input" type="text" placeholder="Course title" id="title" v-model="addNewCourseInfo.title">
+                <input class="input" type="number" min="1" max="8" placeholder="Semester" id="semester" v-model="addNewCourseInfo.semester">
+                <input class="input" type="number" min="0" max="100" placeholder="Grade" id="grade" v-model="addNewCourseInfo.grade">
                 <button class="green-button" id="save-course" @click="save()">Save</button>
                 <button class="grey-button" id="cancel-course" @click="cancel()">Cancel</button>
              </span>
@@ -48,10 +48,26 @@
                     new Course("Algorithms and Data Structures", 1, 68),
                     new Course("Introduction to Data Science", 1, 76)
                 ],
-
+                addNewCourseInfo: {
+                    title: '',
+                    semester: '',
+                    grade: ''
+                }
             }
         },
-
+        methods: {
+            save: function(){
+                if (this.addNewCourseInfo.title !== '' && this.addNewCourseInfo.semester !== '' && this.addNewCourseInfo.grade !== ''){
+                this.courses.push(new Course(this.addNewCourseInfo.title, this.addNewCourseInfo.semester, this.addNewCourseInfo.grade));
+                }
+            },
+            cancel: function () {
+                this.addNewCourseInfo.title = '';
+                this.addNewCourseInfo.semester = '';
+                this.addNewCourseInfo.grade = '';
+                this.addCourse = false;
+            }
+        }
     }
 </script>
 
